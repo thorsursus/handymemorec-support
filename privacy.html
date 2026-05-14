@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handy Meeting Notes — Privacy Policy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,500;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f8f7f4;
+            --text: #1a1a1a;
+            --muted: #6b6b6b;
+            --accent: #7a4eb8;
+            --accent-soft: #efe7fa;
+            --card-bg: #ffffff;
+            --border: #e4e2dd;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; min-height: 100vh; display: flex; flex-direction: column; }
+
+        .container { max-width: 680px; margin: 0 auto; padding: 0 24px; width: 100%; }
+
+        header { padding: 48px 0 0; text-align: center; }
+
+        .app-icon { width: 80px; height: 80px; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; }
+
+        h1 { font-family: 'Instrument Serif', serif; font-size: 2.4rem; font-weight: 400; letter-spacing: -0.02em; margin-bottom: 6px; }
+
+        .subtitle { color: var(--muted); font-size: 1.05rem; font-weight: 300; }
+
+        nav { display: flex; gap: 24px; justify-content: center; padding: 32px 0; font-size: 0.9rem; }
+
+        nav a { color: var(--muted); text-decoration: none; padding-bottom: 2px; border-bottom: 1px solid transparent; transition: all 0.2s; }
+
+        nav a:hover, nav a.active { color: var(--text); border-bottom-color: var(--text); }
+
+        main { flex: 1; padding-bottom: 80px; }
+
+        .section { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 32px; margin-bottom: 20px; }
+
+        .section h2 { font-family: 'Instrument Serif', serif; font-size: 1.5rem; font-weight: 400; margin-bottom: 12px; }
+
+        .section h3 { font-size: 1rem; font-weight: 500; margin-top: 20px; margin-bottom: 8px; }
+
+        .section h3:first-of-type { margin-top: 0; }
+
+        .section p { color: var(--muted); font-size: 0.95rem; margin-bottom: 12px; }
+
+        .section p:last-child { margin-bottom: 0; }
+
+        .section ul { color: var(--muted); font-size: 0.95rem; margin-bottom: 12px; padding-left: 20px; }
+
+        .section ul li { margin-bottom: 6px; }
+
+        .effective-date { color: var(--muted); font-size: 0.85rem; font-style: italic; margin-bottom: 16px; }
+
+        footer { text-align: center; padding: 32px 0; color: var(--muted); font-size: 0.8rem; border-top: 1px solid var(--border); }
+
+        footer a { color: var(--muted); text-decoration: none; }
+
+        footer a:hover { color: var(--text); }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8rem; }
+            .section { padding: 24px; }
+            header { padding: 32px 0 0; }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="app-icon">
+                <img src="app-icon.png" alt="Handy Meeting Notes" style="width: 80px; height: 80px; border-radius: 18px;">
+            </div>
+            <h1>Handy Meeting Notes</h1>
+            <p class="subtitle">Privacy Policy</p>
+        </div>
+    </header>
+
+    <nav class="container">
+        <a href="index.html">Support</a>
+        <a href="privacy.html" class="active">Privacy Policy</a>
+    </nav>
+
+    <main>
+        <div class="container">
+            <div class="section">
+                <p class="effective-date">Effective date: May 14, 2026</p>
+
+                <h3>Overview</h3>
+                <p>Handy Meeting Notes ("the App") is a macOS menu-bar application that records meetings, transcribes them on-device with WhisperKit, and generates structured meeting notes with Apple Intelligence. The App is designed to be privacy-first: <strong>none of your audio, transcripts, or notes ever leave your Mac</strong>.</p>
+
+                <h3>Data we collect</h3>
+                <p>The App does <strong>not</strong> collect, store, or transmit any personal data to our servers. We do not operate any backend servers or cloud services. We have no analytics, no telemetry, no crash reporting, and no way of knowing how you use the App.</p>
+
+                <h3>What the App processes locally</h3>
+                <p>To do its job, the App records and stores the following <strong>on your Mac only</strong>:</p>
+                <ul>
+                    <li><strong>Microphone audio</strong> — captured only while you have explicitly enabled a recording from the menu bar. The macOS microphone permission prompt appears on first use.</li>
+                    <li><strong>System audio</strong> — captured via Core Audio's process tap, only while recording is active. The macOS audio-capture permission prompt appears on first use.</li>
+                    <li><strong>Transcripts</strong> — produced by Apple's WhisperKit speech-to-text framework, running entirely on your Mac.</li>
+                    <li><strong>Meeting notes</strong> — produced by Apple's Foundation Models framework (Apple Intelligence), running entirely on your Mac.</li>
+                </ul>
+                <p>Source audio files are <strong>deleted automatically</strong> after a successful transcription. Only the resulting transcript and meeting notes are retained. If a transcription fails, the audio is kept until you retry or discard it.</p>
+
+                <h3>Where data is stored</h3>
+                <p>All recordings, transcripts, and meeting notes are stored in <strong>your iCloud Drive</strong>, inside the App's iCloud container (under iCloud Drive → Handy Meeting Notes → Recordings). If iCloud is unavailable, the App falls back to a local folder in macOS Application Support.</p>
+                <p>Because the data is in your iCloud Drive, it syncs across your devices via Apple's iCloud service. Apple's iCloud privacy policy applies to that sync; the App itself does not control or operate that channel.</p>
+
+                <h3>Network use</h3>
+                <p>The App makes one type of network request: <strong>WhisperKit downloads the speech-to-text model on first use</strong> from Hugging Face (huggingface.co). This is a one-time download of approximately 244 MB. After the model is on disk, the App works fully offline.</p>
+                <p>The App makes no other network requests. It does not contact our servers, third-party analytics, advertising networks, or AI services. Apple Intelligence runs entirely on-device on your Mac.</p>
+
+                <h3>Apple Intelligence</h3>
+                <p>The App uses Apple's Foundation Models framework for meeting-note generation, AI Coach observations, and archive search. Apple's framework runs the model locally on your Mac; no transcript or note content is sent to Apple's servers. The output is subject to Apple Intelligence's content guardrails, which may occasionally decline to process specific content.</p>
+
+                <h3>Local storage</h3>
+                <p>The App stores the following locally on your device:</p>
+                <ul>
+                    <li>Preferences (recording duration default, language, AI Coach configuration), in macOS UserDefaults.</li>
+                    <li>Recordings, transcripts, and meeting notes, in the iCloud container (or local fallback).</li>
+                    <li>The WhisperKit speech-to-text model, downloaded once.</li>
+                </ul>
+
+                <h3>Analytics and tracking</h3>
+                <p>The App contains <strong>no</strong> analytics, telemetry, crash reporting, advertising identifiers, or tracking of any kind.</p>
+
+                <h3>Third-party services</h3>
+                <p>Aside from the one-time WhisperKit model download from Hugging Face, the App does not communicate with any third-party service. Apple Intelligence is provided by macOS itself.</p>
+
+                <h3>Recording-consent responsibility</h3>
+                <p>Laws around recording conversations vary by country and state. In many jurisdictions, all participants must give consent. It is <strong>your responsibility</strong> as the user to comply with local law and to inform participants when you are recording.</p>
+
+                <h3>Children's privacy</h3>
+                <p>The App is not directed at children under 13. We do not knowingly collect personal information from children.</p>
+
+                <h3>Changes to this policy</h3>
+                <p>If we update this privacy policy, the changes will be posted on this page with a revised effective date.</p>
+
+                <h3>Contact</h3>
+                <p>If you have any questions about this privacy policy, please contact us at <a href="mailto:thorsursus@icloud.com" style="color: var(--accent);">thorsursus@icloud.com</a>.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Handy Meeting Notes &middot; <a href="privacy.html">Privacy Policy</a></p>
+        </div>
+    </footer>
+</body>
+</html>
