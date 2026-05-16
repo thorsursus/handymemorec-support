@@ -93,7 +93,7 @@
     <main>
         <div class="container">
             <div class="section">
-                <p class="effective-date">Effective date: May 14, 2026</p>
+                <p class="effective-date">Effective date: May 16, 2026</p>
 
                 <h3>Overview</h3>
                 <p>Handy Meeting Notes ("the App") is a macOS menu-bar application that records meetings, transcribes them on-device with WhisperKit, and generates structured meeting notes with Apple Intelligence. The App is designed to be privacy-first: <strong>none of your audio, transcripts, or notes ever leave your Mac</strong>.</p>
@@ -106,7 +106,7 @@
                 <ul>
                     <li><strong>Microphone audio</strong> — captured only while you have explicitly enabled a recording from the menu bar. The macOS microphone permission prompt appears on first use.</li>
                     <li><strong>System audio</strong> — captured via Core Audio's process tap, only while recording is active. The macOS audio-capture permission prompt appears on first use.</li>
-                    <li><strong>Transcripts</strong> — produced by Apple's WhisperKit speech-to-text framework, running entirely on your Mac.</li>
+                    <li><strong>Transcripts</strong> — produced by WhisperKit, an open-source speech-to-text framework by Argmax, running entirely on your Mac.</li>
                     <li><strong>Meeting notes</strong> — produced by Apple's Foundation Models framework (Apple Intelligence), running entirely on your Mac.</li>
                 </ul>
                 <p>Source audio files are <strong>deleted automatically</strong> after a successful transcription. Only the resulting transcript and meeting notes are retained. If a transcription fails, the audio is kept until you retry or discard it.</p>
@@ -114,6 +114,9 @@
                 <h3>Where data is stored</h3>
                 <p>All recordings, transcripts, and meeting notes are stored in <strong>your iCloud Drive</strong>, inside the App's iCloud container (under iCloud Drive → Handy Meeting Notes → Recordings). If iCloud is unavailable, the App falls back to a local folder in macOS Application Support.</p>
                 <p>Because the data is in your iCloud Drive, it syncs across your devices via Apple's iCloud service. Apple's iCloud privacy policy applies to that sync; the App itself does not control or operate that channel.</p>
+
+                <h3>Sharing with the Personal Voice Mode companion app</h3>
+                <p>If you choose to install the optional companion app <em>Personal Voice Mode</em>, text artifacts (transcripts, meeting notes, AI Coach threads, live subtitles) are made available to it via a shared iCloud container on your Mac. Source audio and capture-internal files remain in a separate, private container that Personal Voice Mode cannot read. The companion app is optional; if you do not install it, no sharing occurs. What Personal Voice Mode then does with the text it reads is governed by Personal Voice Mode's own privacy policy.</p>
 
                 <h3>Network use</h3>
                 <p>The App makes one type of network request: <strong>WhisperKit downloads the speech-to-text model on first use</strong> from Hugging Face (huggingface.co). This is a one-time download of approximately 244 MB. After the model is on disk, the App works fully offline.</p>
