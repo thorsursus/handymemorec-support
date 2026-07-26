@@ -93,63 +93,80 @@
     <main>
         <div class="container">
             <div class="section">
-                <p class="effective-date">Effective date: May 16, 2026</p>
+                <p class="effective-date">Effective date: July 26, 2026</p>
 
                 <h3>Overview</h3>
-                <p>Handy Meeting Notes ("the App") is a macOS menu-bar application that records meetings, transcribes them on-device with WhisperKit, and generates structured meeting notes with Apple Intelligence. The App is designed to be privacy-first: <strong>none of your audio, transcripts, or notes ever leave your Mac</strong>.</p>
+                <p>Handy Meeting Notes ("the App") records meetings, transcribes them on your own device, and turns them into structured notes. It ships as a macOS menu-bar app and an iPhone companion app.</p>
+                <p><strong>Transcription always runs on your device.</strong> Your recorded audio is never uploaded, on either platform. AI features are local-first: they use Ollama on your own Mac by default. There is one exception, described in full under <em>Optional OpenAI fallback</em> below — if you choose to save an OpenAI API key, meeting text can be sent to OpenAI. That is off unless you turn it on.</p>
 
                 <h3>Data we collect</h3>
-                <p>The App does <strong>not</strong> collect, store, or transmit any personal data to our servers. We do not operate any backend servers or cloud services. We have no analytics, no telemetry, no crash reporting, and no way of knowing how you use the App.</p>
+                <p>We collect <strong>nothing</strong>. We operate no servers and no cloud services. There is no analytics, no telemetry, no crash reporting, no advertising identifier, and no mechanism by which we could learn anything about how you use the App. We never receive your recordings, transcripts, or notes.</p>
 
-                <h3>What the App processes locally</h3>
-                <p>To do its job, the App records and stores the following <strong>on your Mac only</strong>:</p>
+                <h3>What the App processes on your device</h3>
                 <ul>
-                    <li><strong>Microphone audio</strong> — captured only while you have explicitly enabled a recording from the menu bar. The macOS microphone permission prompt appears on first use.</li>
-                    <li><strong>System audio</strong> — captured via Core Audio's process tap, only while recording is active. The macOS audio-capture permission prompt appears on first use.</li>
-                    <li><strong>Transcripts</strong> — produced by WhisperKit, an open-source speech-to-text framework by Argmax, running entirely on your Mac.</li>
-                    <li><strong>Meeting notes</strong> — produced by Apple's Foundation Models framework (Apple Intelligence), running entirely on your Mac.</li>
+                    <li><strong>Microphone audio</strong> — captured only while you have explicitly started a recording. The system microphone permission prompt appears on first use.</li>
+                    <li><strong>System audio</strong> (macOS only) — captured via Core Audio's process tap, only while recording is active. The system audio-capture permission prompt appears on first use.</li>
+                    <li><strong>Transcripts</strong> — produced by WhisperKit, an open-source speech-to-text engine by argmax, inc., running entirely on your own device.</li>
+                    <li><strong>Meeting notes, AI Coach threads, and archive search answers</strong> — produced from the transcript text by whichever AI provider you have configured. See <em>AI processing</em> below.</li>
+                    <li><strong>Screen context</strong> (macOS only, optional and off by default) — if you explicitly attach a screen capture to a recording, the App snapshots the single window you pick, roughly one frame every 15 seconds, and stores those frames beside that meeting. This requires the system Screen Recording permission. These images are never uploaded and are never sent to any AI provider.</li>
+                    <li><strong>Dictated notes</strong> (iPhone) — dictation uses Apple's on-device speech recognition. The App requires on-device recognition and will refuse to dictate rather than fall back to network recognition, so dictated audio does not leave your iPhone.</li>
                 </ul>
-                <p>Source audio files are <strong>deleted automatically</strong> after a successful transcription. Only the resulting transcript and meeting notes are retained. If a transcription fails, the audio is kept until you retry or discard it.</p>
+                <p>Source audio is <strong>deleted automatically</strong> after a successful transcription, subject to the retention period you choose in Settings. Only text is kept long-term. If a transcription fails repeatedly, the audio is kept until you retry or discard it — it is never silently thrown away.</p>
+
+                <h3>AI processing</h3>
+                <p>Meeting notes, the AI Coach, and archive search send <em>transcript text</em> (never audio, never screen captures) to a language model. Which model, and therefore where that text goes, is entirely your choice:</p>
+                <ul>
+                    <li><strong>Ollama (default).</strong> Ollama is a separate program you install and run on your own machine. The App talks to it at a local address on your computer. Nothing leaves your machine.</li>
+                    <li><strong>OpenAI (optional fallback).</strong> Only if you save an OpenAI API key, and only when Ollama is unavailable.</li>
+                </ul>
+                <p>If neither is available, the App tells you so and produces no notes. It does not silently reach for a network service.</p>
+
+                <h3>Optional OpenAI fallback</h3>
+                <p>This is the only path by which your meeting content can leave your machine, so we want to be exact about it.</p>
+                <p>If — and only if — you enter an OpenAI API key in Settings, then whenever Ollama is not reachable, the App sends transcript excerpts, meeting context, and related text to OpenAI's servers over the internet in order to generate notes or answers. This happens under <strong>your own OpenAI account</strong>, is billed to you, and is governed by <strong>your agreement with OpenAI</strong>, including their data retention and usage terms. We are not a party to that exchange and never receive the content.</p>
+                <p>Your API key is stored in your device's Keychain. It is never written to preferences, never included in exports, and never transmitted anywhere except to OpenAI to authenticate your own requests.</p>
+                <p><strong>To keep every meeting on your machine, simply leave the API key empty.</strong> That is the default state. Your recorded audio is never sent to OpenAI under any configuration.</p>
 
                 <h3>Where data is stored</h3>
-                <p>All recordings, transcripts, and meeting notes are stored in <strong>your iCloud Drive</strong>, inside the App's iCloud container (under iCloud Drive → Handy Meeting Notes → Recordings). If iCloud is unavailable, the App falls back to a local folder in macOS Application Support.</p>
-                <p>Because the data is in your iCloud Drive, it syncs across your devices via Apple's iCloud service. Apple's iCloud privacy policy applies to that sync; the App itself does not control or operate that channel.</p>
+                <p>Recordings, transcripts, and notes are stored in the App's iCloud container on your own iCloud account. If iCloud is unavailable, the App falls back to a local folder in Application Support.</p>
+                <p>Because the data lives in your iCloud, it syncs across your devices via Apple's iCloud service. Apple's iCloud privacy policy governs that sync; the App neither controls nor operates that channel.</p>
 
                 <h3>Sharing with the Personal Voice Mode companion app</h3>
-                <p>If you choose to install the optional companion app <em>Personal Voice Mode</em>, text artifacts (transcripts, meeting notes, AI Coach threads, live subtitles) are made available to it via a shared iCloud container on your Mac. Source audio and capture-internal files remain in a separate, private container that Personal Voice Mode cannot read. The companion app is optional; if you do not install it, no sharing occurs. What Personal Voice Mode then does with the text it reads is governed by Personal Voice Mode's own privacy policy.</p>
+                <p>If you choose to install the optional companion app <em>Personal Voice Mode</em>, text artifacts (transcripts, notes, AI Coach threads, subtitles) are made available to it through a shared iCloud container on your own account. Source audio, screen captures, and capture-internal files stay in a separate private container that Personal Voice Mode cannot read. If you do not install it, no sharing occurs. What Personal Voice Mode does with the text it reads is governed by its own privacy policy.</p>
 
                 <h3>Network use</h3>
-                <p>The App makes one type of network request: <strong>WhisperKit downloads the speech-to-text model on first use</strong> from Hugging Face (huggingface.co). This is a one-time download of approximately 244 MB. After the model is on disk, the App works fully offline.</p>
-                <p>The App makes no other network requests. It does not contact our servers, third-party analytics, advertising networks, or AI services. Apple Intelligence runs entirely on-device on your Mac.</p>
-
-                <h3>Apple Intelligence</h3>
-                <p>The App uses Apple's Foundation Models framework for meeting-note generation, AI Coach observations, and archive search. Apple's framework runs the model locally on your Mac; no transcript or note content is sent to Apple's servers. The output is subject to Apple Intelligence's content guardrails, which may occasionally decline to process specific content.</p>
+                <p>The App can make these network requests, and no others:</p>
+                <ul>
+                    <li><strong>Speech-model download</strong> — WhisperKit downloads the speech-to-text model you select from Hugging Face, once per model. This request carries no content of yours.</li>
+                    <li><strong>Ollama</strong> — a connection to Ollama on your own computer. This does not traverse the internet.</li>
+                    <li><strong>OpenAI</strong> — only under the conditions described above, and only if you have saved a key.</li>
+                </ul>
+                <p>The App never contacts servers of ours, because we operate none. It contacts no analytics, advertising, or crash-reporting service of any kind.</p>
 
                 <h3>Local storage</h3>
-                <p>The App stores the following locally on your device:</p>
                 <ul>
-                    <li>Preferences (recording duration default, language, AI Coach configuration), in macOS UserDefaults.</li>
-                    <li>Recordings, transcripts, and meeting notes, in the iCloud container (or local fallback).</li>
-                    <li>The WhisperKit speech-to-text model, downloaded once.</li>
+                    <li>Preferences (recording defaults, language, transcription model, AI provider settings), in system preferences storage. Your OpenAI key is <em>not</em> among them — it lives in the Keychain.</li>
+                    <li>Recordings, transcripts, notes, and any screen context, in the iCloud container or local fallback.</li>
+                    <li>The WhisperKit speech-to-text model, downloaded once per model you select.</li>
                 </ul>
 
                 <h3>Analytics and tracking</h3>
-                <p>The App contains <strong>no</strong> analytics, telemetry, crash reporting, advertising identifiers, or tracking of any kind.</p>
-
-                <h3>Third-party services</h3>
-                <p>Aside from the one-time WhisperKit model download from Hugging Face, the App does not communicate with any third-party service. Apple Intelligence is provided by macOS itself.</p>
+                <p>The App contains no analytics, telemetry, crash reporting, advertising identifiers, or tracking of any kind. It does not combine your data with data from other apps or data brokers.</p>
 
                 <h3>Recording-consent responsibility</h3>
-                <p>Laws around recording conversations vary by country and state. In many jurisdictions, all participants must give consent. It is <strong>your responsibility</strong> as the user to comply with local law and to inform participants when you are recording.</p>
+                <p>Laws around recording conversations vary by country and state. In many jurisdictions every participant must consent. It is your responsibility as the user to comply with local law and to tell participants when you are recording. The App shows you this reminder on first launch.</p>
+
+                <h3>Your control over your data</h3>
+                <p>All your data lives on your own devices and in your own iCloud account. You can delete any meeting from within the App, or delete everything by removing the App's iCloud container and uninstalling. There is no account to close and no data of yours for us to delete, because we never hold any.</p>
 
                 <h3>Children's privacy</h3>
-                <p>The App is not directed at children under 13. We do not knowingly collect personal information from children.</p>
+                <p>The App is not directed at children under 13. We do not knowingly collect personal information from children — or, indeed, from anyone.</p>
 
                 <h3>Changes to this policy</h3>
                 <p>If we update this privacy policy, the changes will be posted on this page with a revised effective date.</p>
 
                 <h3>Contact</h3>
-                <p>If you have any questions about this privacy policy, please contact us at <a href="mailto:thorsursus@icloud.com" style="color: var(--accent);">thorsursus@icloud.com</a>.</p>
+                <p>If you have any questions about this privacy policy, please contact us at <a href="mailto:thorsursus@icloud.com">thorsursus@icloud.com</a>.</p>
             </div>
         </div>
     </main>
