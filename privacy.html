@@ -97,7 +97,7 @@
 
                 <h3>Overview</h3>
                 <p>Handy Meeting Notes ("the App") records meetings, transcribes them on your own device, and turns them into structured notes. It ships as a macOS menu-bar app and an iPhone companion app.</p>
-                <p><strong>Transcription always runs on your device.</strong> Recorded audio is never sent to a transcription or AI provider. Mac recordings, including source audio while retained, may sync through your own iCloud account. AI features use a local Ollama address by default. If you confirm a remote HTTPS Ollama endpoint or save an OpenAI API key, meeting text can leave your Mac as described below.</p>
+                <p><strong>Transcription always runs on your device.</strong> Recorded audio is never sent to a transcription or AI provider. Mac recordings, including source audio while retained, may sync through your own iCloud account. AI features use a local Ollama address by default. Meeting text can leave your Mac only after you explicitly approve a remote HTTPS Ollama endpoint or explicitly allow the OpenAI fallback and save your own API key, as described below.</p>
 
                 <h3>Data received by the developer</h3>
                 <p>We operate no server that receives your meeting data. The App has no analytics, telemetry, crash reporting, advertising identifier, or tracking. We do not receive your recordings, transcripts, or notes. Apple's iCloud service may sync your files, and a remote AI provider you configure may receive and retain meeting text as explained below.</p>
@@ -119,7 +119,9 @@
                     <li><strong>Ollama (default).</strong> Ollama is a separate program. The default endpoint is on your own Mac, so meeting text stays on that Mac. You can choose a remote HTTPS endpoint in Settings; it remains inactive until you confirm that exact address. The App then sends meeting text to that server; its operator may process, retain, or associate the text with your account under their own terms.</li>
                     <li><strong>OpenAI (optional fallback).</strong> Only if you save an OpenAI API key, and only when Ollama is unavailable.</li>
                 </ul>
-                <p>If neither is available, the App tells you so and produces no notes. It does not silently reach for a network service.</p>
+                <p>The App displays the categories of meeting text that will be shared and asks for explicit permission before either off-device AI path is activated. If neither path is available, the App tells you so and produces no notes. It does not silently reach for a network service. You can withdraw permission for OpenAI by removing the API key, or for remote Ollama by changing the endpoint back to the local default.</p>
+
+                <p>We do not select, operate, or receive data from these user-configured AI services, and we do not authorise them to use meeting text for advertising or tracking. Any provider you enable must protect the meeting text to the same or a higher standard than this policy and applicable privacy law. Only enable a provider after reviewing its terms and privacy controls. Remote connections must use HTTPS, and the App sends only the text needed for the feature you invoke.</p>
 
                 <h3>Optional OpenAI fallback</h3>
                 <p>This is another optional path by which meeting text can leave your Mac, in addition to a remote Ollama endpoint and system-managed iCloud sync.</p>
@@ -154,7 +156,7 @@
                 <p>The App contains no analytics, telemetry, crash reporting, advertising identifiers, or tracking of any kind. It does not combine your data with data from other apps or data brokers.</p>
 
                 <h3>Recording-consent responsibility</h3>
-                <p>Laws around recording conversations vary by country and state. In many jurisdictions every participant must consent. It is your responsibility as the user to comply with local law and to tell participants when you are recording. The App shows you this reminder on first launch.</p>
+                <p>Laws around recording conversations vary by country and state. In many jurisdictions every participant must consent. It is your responsibility as the user to comply with local law and to tell participants when you are recording. The App explains this on first launch and requires you to confirm participant approval before every recording begins.</p>
 
                 <h3>Your control over your data</h3>
                 <p>App-managed files live on your devices and, when available, in your own iCloud account. You can delete meetings in the App or remove its iCloud data and uninstall it. If you have configured a remote Ollama endpoint or OpenAI, their own terms and controls govern any meeting text they receive. There is no account with us to close and no meeting data held by us.</p>
