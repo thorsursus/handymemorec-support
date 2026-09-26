@@ -93,14 +93,14 @@
     <main>
         <div class="container">
             <div class="section">
-                <p class="effective-date">Effective date: July 26, 2026</p>
+                <p class="effective-date">Effective date: September 26, 2026</p>
 
                 <h3>Overview</h3>
                 <p>Handy Meeting Notes ("the App") records meetings, transcribes them on your own device, and turns them into structured notes. It ships as a macOS menu-bar app and an iPhone companion app.</p>
-                <p><strong>Transcription always runs on your device.</strong> Your recorded audio is never uploaded, on either platform. AI features are local-first: they use Ollama on your own Mac by default. There is one exception, described in full under <em>Optional OpenAI fallback</em> below — if you choose to save an OpenAI API key, meeting text can be sent to OpenAI. That is off unless you turn it on.</p>
+                <p><strong>Transcription always runs on your device.</strong> Recorded audio is never sent to a transcription or AI provider. Mac recordings, including source audio while retained, may sync through your own iCloud account. AI features use a local Ollama address by default. If you confirm a remote HTTPS Ollama endpoint or save an OpenAI API key, meeting text can leave your Mac as described below.</p>
 
-                <h3>Data we collect</h3>
-                <p>We collect <strong>nothing</strong>. We operate no servers and no cloud services. There is no analytics, no telemetry, no crash reporting, no advertising identifier, and no mechanism by which we could learn anything about how you use the App. We never receive your recordings, transcripts, or notes.</p>
+                <h3>Data received by the developer</h3>
+                <p>We operate no server that receives your meeting data. The App has no analytics, telemetry, crash reporting, advertising identifier, or tracking. We do not receive your recordings, transcripts, or notes. Apple's iCloud service may sync your files, and a remote AI provider you configure may receive and retain meeting text as explained below.</p>
 
                 <h3>What the App processes on your device</h3>
                 <ul>
@@ -108,37 +108,37 @@
                     <li><strong>System audio</strong> (macOS only) — captured via Core Audio's process tap, only while recording is active. The system audio-capture permission prompt appears on first use.</li>
                     <li><strong>Transcripts</strong> — produced by WhisperKit, an open-source speech-to-text engine by argmax, inc., running entirely on your own device.</li>
                     <li><strong>Meeting notes, AI Coach threads, and archive search answers</strong> — produced from the transcript text by whichever AI provider you have configured. See <em>AI processing</em> below.</li>
-                    <li><strong>Screen context</strong> (macOS only, optional and off by default) — if you explicitly attach a screen capture to a recording, the App snapshots the single window you pick, roughly one frame every 15 seconds, and stores those frames beside that meeting. This requires the system Screen Recording permission. These images are never uploaded and are never sent to any AI provider.</li>
+                    <li><strong>Screen context</strong> (macOS only, optional and off by default) — if you explicitly attach a screen capture to a recording, the App snapshots the single window you pick, roughly one frame every 15 seconds, and stores those frames beside that meeting. This requires the system Screen Recording permission. These images are never sent to an AI provider, but may sync through your iCloud account while stored in the Mac app's iCloud container.</li>
                     <li><strong>Dictated notes</strong> (iPhone) — dictation uses Apple's on-device speech recognition. The App requires on-device recognition and will refuse to dictate rather than fall back to network recognition, so dictated audio does not leave your iPhone.</li>
                 </ul>
-                <p>Source audio is <strong>deleted automatically</strong> after a successful transcription, subject to the retention period you choose in Settings. Only text is kept long-term. If a transcription fails repeatedly, the audio is kept until you retry or discard it — it is never silently thrown away.</p>
+                <p>Source audio is <strong>deleted automatically</strong> after a successful transcription, subject to the retention period you choose in Settings. Transcripts and notes are kept until you delete them. If transcription fails repeatedly, the audio remains available until you retry or delete the meeting.</p>
 
                 <h3>AI processing</h3>
-                <p>Meeting notes, the AI Coach, and archive search send <em>transcript text</em> (never audio, never screen captures) to a language model. Which model, and therefore where that text goes, is entirely your choice:</p>
+                <p>Meeting notes, the AI Coach, and AI-powered archive questions send meeting text to a language model. That text may include transcripts, minutes, manual notes, names you enter for consenting participants, questions or search terms you type, and extracted text from documents you attach to AI Coach. Raw audio and screen captures are never sent to an AI provider. The provider, and therefore where the text goes, depends on your Settings:</p>
                 <ul>
-                    <li><strong>Ollama (default).</strong> Ollama is a separate program you install and run on your own machine. The App talks to it at a local address on your computer. Nothing leaves your machine.</li>
+                    <li><strong>Ollama (default).</strong> Ollama is a separate program. The default endpoint is on your own Mac, so meeting text stays on that Mac. You can choose a remote HTTPS endpoint in Settings; it remains inactive until you confirm that exact address. The App then sends meeting text to that server; its operator may process, retain, or associate the text with your account under their own terms.</li>
                     <li><strong>OpenAI (optional fallback).</strong> Only if you save an OpenAI API key, and only when Ollama is unavailable.</li>
                 </ul>
                 <p>If neither is available, the App tells you so and produces no notes. It does not silently reach for a network service.</p>
 
                 <h3>Optional OpenAI fallback</h3>
-                <p>This is the only path by which your meeting content can leave your machine, so we want to be exact about it.</p>
-                <p>If — and only if — you enter an OpenAI API key in Settings, then whenever Ollama is not reachable, the App sends transcript excerpts, meeting context, and related text to OpenAI's servers over the internet in order to generate notes or answers. This happens under <strong>your own OpenAI account</strong>, is billed to you, and is governed by <strong>your agreement with OpenAI</strong>, including their data retention and usage terms. We are not a party to that exchange and never receive the content.</p>
+                <p>This is another optional path by which meeting text can leave your Mac, in addition to a remote Ollama endpoint and system-managed iCloud sync.</p>
+                <p>If — and only if — you enter an OpenAI API key in Settings, then whenever Ollama is not reachable, the App sends transcript excerpts, meeting context, and related text to OpenAI's servers over the internet in order to generate notes or answers. This happens under <strong>your own OpenAI account</strong>, is billed to you, and is governed by <strong>your agreement with OpenAI</strong>, including their data retention and usage terms. OpenAI may associate the request with your account. We are not a party to that exchange and never receive the content.</p>
                 <p>Your API key is stored in your device's Keychain. It is never written to preferences, never included in exports, and never transmitted anywhere except to OpenAI to authenticate your own requests.</p>
-                <p><strong>To keep every meeting on your machine, simply leave the API key empty.</strong> That is the default state. Your recorded audio is never sent to OpenAI under any configuration.</p>
+                <p><strong>To keep meeting text away from remote AI providers, leave the Ollama endpoint at its local default and leave the OpenAI key empty.</strong> Your recorded audio is never sent to OpenAI under any configuration. If iCloud is available, the Mac app also stores meeting files in your iCloud container for Apple's sync; a local fallback is used when iCloud is unavailable.</p>
 
                 <h3>Where data is stored</h3>
-                <p>Recordings, transcripts, and notes are stored in the App's iCloud container on your own iCloud account. If iCloud is unavailable, the App falls back to a local folder in Application Support.</p>
-                <p>Because the data lives in your iCloud, it syncs across your devices via Apple's iCloud service. Apple's iCloud privacy policy governs that sync; the App neither controls nor operates that channel.</p>
+                <p>On Mac, recordings (including source audio while retained), transcripts, notes, and optional screen context are stored in the App's iCloud container on your own iCloud account. If iCloud is unavailable, the Mac app falls back to a local folder in Application Support. On iPhone or iPad, source audio is stored locally in the App's Application Support folder; meeting text is published into a shared iCloud container for use across your devices.</p>
+                <p>Files in your iCloud containers may sync through Apple's iCloud service. Apple's iCloud privacy policy governs that sync; the App neither controls nor operates that channel.</p>
 
                 <h3>Sharing with the Personal Voice Mode companion app</h3>
                 <p>If you choose to install the optional companion app <em>Personal Voice Mode</em>, text artifacts (transcripts, notes, AI Coach threads, subtitles) are made available to it through a shared iCloud container on your own account. Source audio, screen captures, and capture-internal files stay in a separate private container that Personal Voice Mode cannot read. If you do not install it, no sharing occurs. What Personal Voice Mode does with the text it reads is governed by its own privacy policy.</p>
 
                 <h3>Network use</h3>
-                <p>The App can make these network requests, and no others:</p>
+                <p>In addition to system-managed iCloud sync, the App can make these direct network requests:</p>
                 <ul>
                     <li><strong>Speech-model download</strong> — WhisperKit downloads the speech-to-text model you select from Hugging Face, once per model. This request carries no content of yours.</li>
-                    <li><strong>Ollama</strong> — a connection to Ollama on your own computer. This does not traverse the internet.</li>
+                    <li><strong>Ollama</strong> — a connection to the endpoint you configure. The default is local to your Mac; a confirmed remote HTTPS endpoint may receive meeting text.</li>
                     <li><strong>OpenAI</strong> — only under the conditions described above, and only if you have saved a key.</li>
                 </ul>
                 <p>The App never contacts servers of ours, because we operate none. It contacts no analytics, advertising, or crash-reporting service of any kind.</p>
@@ -157,7 +157,7 @@
                 <p>Laws around recording conversations vary by country and state. In many jurisdictions every participant must consent. It is your responsibility as the user to comply with local law and to tell participants when you are recording. The App shows you this reminder on first launch.</p>
 
                 <h3>Your control over your data</h3>
-                <p>All your data lives on your own devices and in your own iCloud account. You can delete any meeting from within the App, or delete everything by removing the App's iCloud container and uninstalling. There is no account to close and no data of yours for us to delete, because we never hold any.</p>
+                <p>App-managed files live on your devices and, when available, in your own iCloud account. You can delete meetings in the App or remove its iCloud data and uninstall it. If you have configured a remote Ollama endpoint or OpenAI, their own terms and controls govern any meeting text they receive. There is no account with us to close and no meeting data held by us.</p>
 
                 <h3>Children's privacy</h3>
                 <p>The App is not directed at children under 13. We do not knowingly collect personal information from children — or, indeed, from anyone.</p>
