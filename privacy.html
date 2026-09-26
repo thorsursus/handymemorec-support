@@ -100,7 +100,7 @@
                 <p><strong>Transcription always runs on your device.</strong> Recorded audio is never sent to a transcription or AI provider. Mac recordings, including source audio while retained, may sync through your own iCloud account. AI features use a local Ollama address by default. Meeting text can leave your Mac only after you explicitly approve a remote HTTPS Ollama endpoint or explicitly allow the OpenAI fallback and save your own API key, as described below.</p>
 
                 <h3>Data received by the developer</h3>
-                <p>We operate no server that receives your meeting data. The App has no analytics, telemetry, crash reporting, advertising identifier, or tracking. We do not receive your recordings, transcripts, or notes. Apple's iCloud service may sync your files, and a remote AI provider you configure may receive and retain meeting text as explained below.</p>
+                <p>We operate no server that receives your meeting data. The App has no analytics, telemetry, crash reporting, advertising identifier, or tracking. We do not receive your recordings, transcripts, or notes. Apple's iCloud service may sync your files, a remote AI provider you configure may receive and retain meeting text as explained below, and Hugging Face receives the network and device information inherent in a speech-model download.</p>
 
                 <h3>What the App processes on your device</h3>
                 <ul>
@@ -139,7 +139,7 @@
                 <h3>Network use</h3>
                 <p>In addition to system-managed iCloud sync, the App can make these direct network requests:</p>
                 <ul>
-                    <li><strong>Speech-model download</strong> — WhisperKit downloads the speech-to-text model you select from Hugging Face, once per model. This request carries no content of yours.</li>
+                    <li><strong>Speech-model download</strong> — WhisperKit downloads the speech-to-text model you select from Hugging Face, once per model. The request carries no recording, transcript, note, participant name, or other meeting content. Like any direct internet request, it exposes your IP address and technical request information such as device type and operating-system version to Hugging Face. Hugging Face may retain and use that information under its own privacy policy to deliver, secure, monitor, and improve its service.</li>
                     <li><strong>Ollama</strong> — a connection to the endpoint you configure. The default is local to your Mac; a confirmed remote HTTPS endpoint may receive meeting text.</li>
                     <li><strong>OpenAI</strong> — only under the conditions described above, and only if you have saved a key.</li>
                 </ul>
